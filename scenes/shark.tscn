@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxwawwiy2mpop"]
+
+[ext_resource type="Script" uid="uid://c1ax2nn0040xs" path="res://scripts/shark.gd" id="1_abcde"]
+
+[sub_resource type="BoxMesh" id="Mesh_fghij"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8l5qy"]
+
+[node name="Shark" type="CharacterBody3D"]
+script = ExtResource("1_abcde")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("Mesh_fghij")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1")
+
+[node name="AttackArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.82585)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+shape = SubResource("BoxShape3D_8l5qy")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
